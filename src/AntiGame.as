@@ -1,12 +1,10 @@
 package
 {
-	import com.antigame.levels.ALevel;
 	import com.antigame.levels.Level1;
-	import com.antigame.levels.Level2;
 	import com.antigame.states.GameState;
+	import com.antigame.states.StarlingTilesGameState;
 	
 	import flash.display.MovieClip;
-	import flash.events.Event;
 	import flash.system.ApplicationDomain;
 	
 	import citrus.core.IState;
@@ -27,10 +25,10 @@ package
 			Starling.handleLostContext = true;
 			setUpStarling(true,1,null);
 			
-			levelManager = new LevelManager(ALevel);
+			levelManager = new LevelManager(StarlingTilesGameState);
 			levelManager.applicationDomain = ApplicationDomain.currentDomain; // to be able to load your SWF level on iOS
 			levelManager.onLevelChanged.add(onLevelChanged);
-			levelManager.levels = [[Level1, "assets/levels/nivel1.swf"],[Level2, "assets/levels/nivel1.swf"]];
+			levelManager.levels = [[Level1, "assets/levels/starlingtiles_demo.swf"]];
 			levelManager.gotoLevel();
 			
 			/*gameState=new GameState();
@@ -38,7 +36,7 @@ package
 			sound.addSound("music","../assets/sounds/break.mp3");*/
 		}
 		
-		private function onLevelChanged(level:ALevel):void 
+		private function onLevelChanged(level:StarlingTilesGameState):void 
 		{
 			state = level;
 			level.lvlEnded.add(_nextLevel);
@@ -57,15 +55,7 @@ package
 		
 		public function changeLvl():void 
 		{
-			state = new ALevel(levelMC);
-		}
-		
-		private function onResize(event:Event):void
-		{
-			/*Starling.current.viewPort = RectangleUtil.fit(
-				new Rectangle(0, 0, stage.stageWidth, stage.stageHeight),
-				new Rectangle(0, 0, size.x, size.y),
-				ScaleMode.SHOW_ALL);*/
+			state = new StarlingTilesGameState(levelMC);
 		}
 	}
 }
