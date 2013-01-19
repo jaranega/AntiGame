@@ -6,6 +6,7 @@
     <SubTexture name="walk_2" x="473" y="2" width="469" height="496"/>
     <SubTexture name="walk_3" x="2" y="500" width="469" height="496"/>
     <SubTexture name="walk_4" x="473" y="500" width="469" height="496"/>  
+    <SubTexture name="die" x="473" y="500" width="469" height="496"/>  
     <SubTexture name="duck" x="473" y="500" width="469" height="496"/>
     <SubTexture name="jump" x="2" y="500" width="469" height="496"/>
     <SubTexture name="idle" x="473" y="500" width="469" height="496"/>
