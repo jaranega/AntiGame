@@ -2,6 +2,7 @@
 bin/
 bin-debug/
 bin-release/
+bin-release-temp/
 
 # Other files and folders
 .settings/
@@ -12,4 +13,5 @@ bin-release/
 .DS_Store
 *.apk
 alf.p12
-bin-release-temp/
+.project
+.actionScriptProperties
