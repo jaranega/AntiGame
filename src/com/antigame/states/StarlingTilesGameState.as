@@ -112,7 +112,7 @@ package com.antigame.states
 			addBackground();
 			
 			
-			//addPhysicsObject();
+			addPhysicsObject();
 		}	
 		
 		private function addPhysicsObject():void
