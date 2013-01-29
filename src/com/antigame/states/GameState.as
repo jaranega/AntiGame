@@ -1,10 +1,5 @@
 package com.antigame.states
 {
-	import flash.display.Bitmap;
-	import flash.events.TimerEvent;
-	import flash.geom.Rectangle;
-	import flash.utils.Timer;
-	
 	import citrus.core.CitrusEngine;
 	import citrus.core.starling.StarlingState;
 	import citrus.input.controllers.starling.VirtualJoystick;
@@ -18,7 +13,15 @@ package com.antigame.states
 	import citrus.view.starlingview.AnimationSequence;
 	import citrus.view.starlingview.StarlingArt;
 	
+	import dragonBones.animation.Animation;
+	
+	import flash.display.Bitmap;
+	import flash.events.TimerEvent;
+	import flash.geom.Rectangle;
+	import flash.utils.Timer;
+	
 	import starling.display.MovieClip;
+	import starling.display.Sprite;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
@@ -113,19 +116,10 @@ package com.antigame.states
 			hero.jumpHeight = 12;
 			
 			hero.view = new AnimationSequence(sTextureAtlas, ["walk","duck","idle","jump","hurt","die"], "idle",10,true);
-			(hero.view.mcSequences["walk"] as starling.display.MovieClip).scaleY = .4;
-			(hero.view.mcSequences["walk"] as starling.display.MovieClip).scaleX = .4;
-			(hero.view.mcSequences["jump"] as starling.display.MovieClip).scaleX = .4;
-			(hero.view.mcSequences["jump"] as starling.display.MovieClip).scaleY = .4;
-			(hero.view.mcSequences["duck"] as starling.display.MovieClip).scaleX = .4;
-			(hero.view.mcSequences["duck"] as starling.display.MovieClip).scaleY = .4;
-			(hero.view.mcSequences["idle"] as starling.display.MovieClip).scaleX = .4;
-			(hero.view.mcSequences["idle"] as starling.display.MovieClip).scaleY = .4;
-			(hero.view.mcSequences["hurt"] as starling.display.MovieClip).scaleX = .4;
-			(hero.view.mcSequences["hurt"] as starling.display.MovieClip).scaleY = .4;
-			(hero.view.mcSequences["die"] as starling.display.MovieClip).scaleX = .4;
-			(hero.view.mcSequences["die"] as starling.display.MovieClip).scaleY = .4;
+			(hero.view as Sprite).scaleX = .4;
+			(hero.view as Sprite).scaleY = .4;
 			hero.hurtDuration=1;
+			
 			add(hero);
 		}
 		
@@ -143,19 +137,10 @@ package com.antigame.states
 				police.x=500+Math.random()*1000;
 				
 				police.view = new AnimationSequence(policeTextureAtlas, ["walk","duck","idle","jump","hurt","die"], "idle",10,true);
-				(police.view.mcSequences["walk"] as starling.display.MovieClip).scaleY = .4;
-				(police.view.mcSequences["walk"] as starling.display.MovieClip).scaleX = .4;
-				(police.view.mcSequences["jump"] as starling.display.MovieClip).scaleX = .4;
-				(police.view.mcSequences["jump"] as starling.display.MovieClip).scaleY = .4;
-				(police.view.mcSequences["duck"] as starling.display.MovieClip).scaleX = .4;
-				(police.view.mcSequences["duck"] as starling.display.MovieClip).scaleY = .4;
-				(police.view.mcSequences["idle"] as starling.display.MovieClip).scaleX = .4;
-				(police.view.mcSequences["idle"] as starling.display.MovieClip).scaleY = .4;
-				(police.view.mcSequences["hurt"] as starling.display.MovieClip).scaleX = .4;
-				(police.view.mcSequences["hurt"] as starling.display.MovieClip).scaleY = .4;
-				(police.view.mcSequences["die"] as starling.display.MovieClip).scaleX = .4;
-				(police.view.mcSequences["die"] as starling.display.MovieClip).scaleY = .4;
+				(police.view as Sprite).scaleX = .4;
+				(police.view as Sprite).scaleY = .4;
 				police.hurtDuration=1;
+				
 				add(police);
 			}
 			
