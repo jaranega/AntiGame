@@ -5,8 +5,9 @@ package
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.utils.LevelManager;
 	
+	import com.antigame.controller.MenuNavigationManager;
 	import com.antigame.states.GameState;
-	import com.antigame.states.MainLoadingState;
+	import com.antigame.states.MainLoadingScreen;
 	
 	import flash.display.MovieClip;
 	import flash.events.TimerEvent;
@@ -26,10 +27,8 @@ package
 	[SWF(width="1024",height="768",frameRate="60", backgroundColor="0x000000")]
 	public class AntiGame extends StarlingCitrusEngine
 	{
-		private var gameState:GameState;
-		private var loadingState:MainLoadingState;
+		private var navigationManager:MenuNavigationManager;
 		
-		private var loadResourcesSuccessSignal:Signal = new Signal();
 		
 		public function AntiGame()
 		{
@@ -37,17 +36,11 @@ package
 			Starling.handleLostContext = true;
 			setUpStarling(true,1,null);
 			this.starling.showStatsAt("left","top",4);
-			
-			loadingState = new MainLoadingState();
-			
-			state = loadingState;
-			
-			
-			loadResources();
-			loadResourcesSuccessSignal.add(onResourcesLoadedHandler);
-			
-			
 			this.starling.stage.addEventListener(Event.RESIZE, onResize);
+			
+			
+			this.navigationManager = new MenuNavigationManager();
+			this.navigationManager.showSplashAndLoadGame();
 		}
 		
 		private function onResize(event:Event, size:Point):void
@@ -61,23 +54,7 @@ package
 			
 		}
 		
-		private function loadResources():void{
-			gameState=new GameState();
-			gameState.loadResources();
-		
-			var downTimer:Timer = new Timer(2000, 1); // every second ten times and then complete         
-			downTimer.addEventListener(TimerEvent.TIMER_COMPLETE, loadResourcessHandler);
-			downTimer.start()
-		}
-		
-		private function loadResourcessHandler(event:TimerEvent):void{
-			this.loadResourcesSuccessSignal.dispatch();
-		}
-		
-		private function onResourcesLoadedHandler():void{
-			this.loadResourcesSuccessSignal.remove(onResourcesLoadedHandler);
-			this.state = this.gameState;
-		}
+			
 		
 	}
 }

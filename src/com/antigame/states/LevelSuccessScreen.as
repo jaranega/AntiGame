@@ -8,9 +8,9 @@ package com.antigame.states
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	
-	public class MainLoadingState extends StarlingState
+	public class LevelSuccessScreen extends StarlingState
 	{
-		public function MainLoadingState()
+		public function LevelSuccessScreen()
 		{
 			super();
 			
@@ -18,8 +18,6 @@ package com.antigame.states
 		
 		override public function initialize():void{
 			super.initialize();
-			var box2D:Box2D=new Box2D("box2D");
-			add(box2D);
 			
 			var ancho:Number = stage.stageWidth;
 			var alto:Number = stage.stageHeight;
