@@ -6,6 +6,8 @@ package com.antigame.states.menu
 	
 	import com.antigame.utils.MenuFactory;
 	
+	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
@@ -13,8 +15,10 @@ package com.antigame.states.menu
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
+	import starling.events.TouchEvent;
 	import starling.text.TextField;
 	
+	/* inspired on "Game Structure" blog post http://pzuh.blogspot.com.es/2012/10/citrus-engine-game-structure.html */
 	public class BaseMenu extends StarlingState
 	{
 		public static const SPLASH_SCREEN:String = "SPLASH_SCREEN";
@@ -30,12 +34,18 @@ package com.antigame.states.menu
 		public var _showMenu:Signal = new Signal(String); //String here is "menu_id"
 		public var _startLevel:Signal= new Signal(String); //String here is "level_id"
 		
+		protected var flashMenu:MovieClip;      
+		
 		public function BaseMenu(menuID:String)
 		{
 			super();
-			
 			this.menuID = menuID;
 			
+			this.addEventListener(TouchEvent.TOUCH, onTouch);
+			
+			if(flashMenu){
+				this.flashMenu.addEventListener(MouseEvent.CLICK, onMouseClick);
+			}
 		}
 		
 		override public function initialize():void{
@@ -47,8 +57,24 @@ package com.antigame.states.menu
 			_showMenu.removeAll();
 			_startLevel.removeAll();
 			
+			this.removeEventListener(TouchEvent.TOUCH, onTouch);
+			
+			if(flashMenu){
+				this.flashMenu.removeEventListener(MouseEvent.CLICK, onMouseClick);
+			}
+			
 			super.destroy();
 		}
+		
+		protected function onTouch(event:TouchEvent):void
+		{
+			//a concrete implementation of this method  need to be defined in child classes
+		}
+		
+		protected function onMouseClick(event:TouchEvent):void
+		{
+			//a concrete implementation of this method  need to be defined in child classes
+		}  
 		
 	}
 }

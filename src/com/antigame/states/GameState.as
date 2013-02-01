@@ -63,10 +63,6 @@ package com.antigame.states
 			super();
 		}
 		
-		public function loadResources():void{
-			CitrusEngine.getInstance().sound.addSound("music","../assets/sounds/break.mp3");
-		}
-		
 		override public function initialize():void
 		{
 			super.initialize();

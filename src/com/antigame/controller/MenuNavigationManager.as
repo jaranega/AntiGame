@@ -1,6 +1,8 @@
 package com.antigame.controller
 {
 	import citrus.core.CitrusEngine;
+	import citrus.core.IState;
+	import citrus.core.starling.StarlingState;
 	
 	import com.antigame.assets.DummyResourceLoader;
 	import com.antigame.states.GameState;
@@ -74,10 +76,28 @@ package com.antigame.controller
 		
 		public function gotoLevel(levelID:String):void{
 			
+			var gameLevel:IState; 
+			switch(levelID){
+				case "lvl1":
+					gameLevel = new GameState();
+					break;
+				case "lvl2":
+					//no level;
+					break;
+					
+			}
+			
+			loadLevel(gameLevel)
 		}
 
-		public function loadLevel():void{
-			//stuff
+		public function loadLevel(state:IState):void{
+			if(!state)
+				return;
+			
+			//setup game level
+			
+			//add game level
+			this.engine.state = state;
 		}
 	
 		

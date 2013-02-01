@@ -44,6 +44,11 @@ package com.antigame.assets
 		
 		public function loadResources():void{
 			
+			//images
+			
+			//sounds
+			CitrusEngine.getInstance().sound.addSound("music","../assets/sounds/break.mp3");
+			
 			//simulate 1 to 4 seconds of resource loading, and lauch Signal
 			var downTimer:Timer = new Timer(Math2.random(2,5)*1000, 1);     
 			downTimer.addEventListener(TimerEvent.TIMER_COMPLETE, loadResourcessHandler);

@@ -4,6 +4,8 @@ package com.antigame.states.menu
 	import citrus.objects.CitrusSprite;
 	import citrus.physics.box2d.Box2D;
 	
+	import com.antigame.utils.MenuFactory;
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.text.TextField;
@@ -19,18 +21,10 @@ package com.antigame.states.menu
 		override public function initialize():void{
 			super.initialize();
 			
-			var ancho:Number = stage.stageWidth;
-			var alto:Number = stage.stageHeight;
-			
-			var loadingText:TextField=new TextField( ancho, alto, "LOADING...","Verdana",60,0x000000,true);
-			loadingText.autoScale=true;
-			
-			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(ancho, alto, 0xFFFFFF),width:ancho,height:alto});
-			
-			var loadingLabel:CitrusSprite=new CitrusSprite("label",{view:loadingText, width:ancho, height:alto});
-			
+			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
-			add(loadingLabel);
+			
+			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL FAILED", 60, true, 150));		
 		}
 	}
 }
