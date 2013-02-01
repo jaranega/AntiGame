@@ -4,30 +4,20 @@ package com.antigame.controller
 	
 	import com.antigame.assets.DummyResourceLoader;
 	import com.antigame.states.GameState;
-	import com.antigame.states.LevelFailureScreen;
-	import com.antigame.states.LevelLoadingScreen;
-	import com.antigame.states.LevelSelectionMenu;
-	import com.antigame.states.LevelSuccessScreen;
-	import com.antigame.states.MainLoadingScreen;
-	import com.antigame.states.MainMenu;
-	import com.antigame.states.SettingsMenu;
-	import com.antigame.states.SplashScreen;
+	import com.antigame.states.menu.BaseMenu;
+	import com.antigame.states.menu.LevelFailureScreen;
+	import com.antigame.states.menu.LevelSelectionMenu;
+	import com.antigame.states.menu.LevelSuccessScreen;
+	import com.antigame.states.menu.MainLoadingScreen;
+	import com.antigame.states.menu.MainMenu;
+	import com.antigame.states.menu.SettingsMenu;
+	import com.antigame.states.menu.SplashScreen;
 
 	public class MenuNavigationManager
 	{
 		private var engine:CitrusEngine;
 		
-		
-		
-		private var splashScreen:SplashScreen;
-		private var loadingScreen:MainLoadingScreen;
-		private var mainMenu:MainMenu;
-		private var levelSelectionMenu:LevelSelectionMenu;
-		private var levelLoadingScreen:LevelLoadingScreen;
-		private var game:GameState;
-		private var levelSuccessScreen:LevelSuccessScreen;
-		private var levelFailureScreen:LevelFailureScreen;
-		private var settingsMenu:SettingsMenu;
+	
 		
 		private var resourceLoader:DummyResourceLoader;
 		
@@ -36,93 +26,61 @@ package com.antigame.controller
 			this.engine = CitrusEngine.getInstance();
 		}
 		
-		public function showSplashAndLoadGame():void{
-			if(!this.splashScreen){
-				this.splashScreen = new SplashScreen();
-			}
-
-			//setup events from splashScreen
-			this.splashScreen._splashScreenTimeout.addOnce(function():void{
-				if(resourceLoader.loadingEnded){
-					showMainMenu();
-				}else{
-					showLoadingScreen();
-				}
-			});
-			engine.state = this.splashScreen;
-			
-			
-			this.resourceLoader = DummyResourceLoader.getInstance();
-			this.resourceLoader.loadResources();
-			this.resourceLoader._loadSuccess.addOnce(function():void{
-				showMainMenu();
-			});
+		public function gotoMenu(menuID:String):void{
+			switch(menuID)
+			{
+				case BaseMenu.SPLASH_SCREEN:
+					showMenu(new SplashScreen());
+					break;
 				
-		}
-		
-		public function showLoadingScreen():void{
-			if(!this.loadingScreen)
-				this.loadingScreen = new MainLoadingScreen();
-			
-			engine.state = this.loadingScreen;
-			
-			//no events to handle
-		}
-		
-		public function showMainMenu():void{
-			if(!this.splashScreen.timedOut){
-				//wait till the splash screen disapears
-				return;
+				case BaseMenu.LOADING_SCREEN:
+					showMenu(new MainLoadingScreen());
+					break;
+				
+				case BaseMenu.MAIN_MENU:
+					showMenu(new MainMenu());
+					break;
+				
+				case BaseMenu.SETTINGS_MENU:
+					showMenu(new SettingsMenu());
+					break;
+				
+				case BaseMenu.LEVEL_SELECTION_MENU:
+					showMenu(new LevelSelectionMenu());
+					break;
+				
+				case BaseMenu.LEVEL_SUCCESS_SCREEN:
+					showMenu(new LevelSuccessScreen());
+					break;
+				
+				case BaseMenu.LEVEL_FAILURE_SCREEN:
+					showMenu(new LevelFailureScreen());
+					
+					break;
+					
+				default:
+					break;
 			}
-			
-			if(!this.resourceLoader.loadingEnded){
-				//wait till the resources are loaded
-				return;
-			}
-			
-			
-			if(!this.mainMenu) 
-				this.mainMenu = new MainMenu();
-			
-			engine.state = this.mainMenu;
-			
-			
-			//setup events from mainMenu
-			this.mainMenu._gotoLevelSelection.add(function():void{
-				showLevelSelection();
-			});
-			
-			this.mainMenu._gotoSettingsMenu.add(function():void{
-				showSettingsMenu();
-			});
 		}
 		
-		public function showLevelSelection():void{
-			if(!this.levelSelectionMenu) 
-				this.levelSelectionMenu = new LevelSelectionMenu();
+		private function showMenu(menu:BaseMenu):void{
+						
+			engine.state = menu;
 			
-			engine.state = this.levelSelectionMenu;
+			menu._showMenu.add(gotoMenu);
+			menu._startLevel.add(gotoLevel);
 		}
 		
-		public function showSettingsMenu():void{
-			if(!this.settingsMenu) this.settingsMenu = new SettingsMenu();
+		
+		public function gotoLevel(levelID:String):void{
 			
-			engine.state = this.settingsMenu;
 		}
-	
+
 		public function loadLevel():void{
-			if(!this.levelLoadingScreen) 
-				this.levelLoadingScreen = new LevelLoadingScreen();
-			
-			engine.state = this.levelLoadingScreen;
+			//stuff
 		}
 	
-		private function showGame():void{
-			if(!this.game) 
-				this.game = new GameState();
-			
-			engine.state = this.game;
-		}
+		
 		
 		
 	}

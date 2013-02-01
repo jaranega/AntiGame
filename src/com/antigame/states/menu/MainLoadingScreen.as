@@ -1,4 +1,4 @@
-package com.antigame.states
+package com.antigame.states.menu
 {
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
@@ -12,27 +12,25 @@ package com.antigame.states
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	
-	public class MainMenu extends StarlingState
+	public class MainLoadingScreen extends BaseMenu
 	{
 		
-		public var _gotoLevelSelection:Signal = new Signal();
-		public var _gotoSettingsMenu:Signal = new Signal();
+	
 		
-		
-		public function MainMenu()
+		public function MainLoadingScreen()
 		{
-			super();
+			super(LOADING_SCREEN);
 			
 		}
 		
 		override public function initialize():void{
 			super.initialize();
 			
+			
 			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this,"titleLabel","MAIN MENU", 0.2, 60, true));		
-			
+			add(MenuFactory.createCenteredLabel(this,"loadingLabel","LOADING...", 0.5, 60, true));		
 		}
 		
 		

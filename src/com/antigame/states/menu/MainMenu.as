@@ -1,4 +1,4 @@
-package com.antigame.states
+package com.antigame.states.menu
 {
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
@@ -6,15 +6,22 @@ package com.antigame.states
 	
 	import com.antigame.utils.MenuFactory;
 	
+	import org.osflash.signals.Signal;
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	
-	public class SettingsMenu extends StarlingState
+	public class MainMenu extends BaseMenu
 	{
-		public function SettingsMenu()
+		
+		public var _gotoLevelSelection:Signal = new Signal();
+		public var _gotoSettingsMenu:Signal = new Signal();
+		
+		
+		public function MainMenu()
 		{
-			super();
+			super(MAIN_MENU);
 			
 		}
 		
@@ -24,7 +31,10 @@ package com.antigame.states
 			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this,"titleLabel","SETTINGS MENU", 0.2, 60, true));		
+			add(MenuFactory.createCenteredLabel(this,"titleLabel","MAIN MENU", 0.2, 60, true));		
+			
 		}
+		
+		
 	}
 }

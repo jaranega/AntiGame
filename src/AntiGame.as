@@ -5,9 +5,11 @@ package
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.utils.LevelManager;
 	
+	import com.antigame.assets.DummyResourceLoader;
 	import com.antigame.controller.MenuNavigationManager;
 	import com.antigame.states.GameState;
-	import com.antigame.states.MainLoadingScreen;
+	import com.antigame.states.menu.BaseMenu;
+	import com.antigame.states.menu.MainLoadingScreen;
 	
 	import flash.display.MovieClip;
 	import flash.events.TimerEvent;
@@ -35,12 +37,14 @@ package
 			super();
 			Starling.handleLostContext = true;
 			setUpStarling(true,1,null);
-			this.starling.showStatsAt("left","top",4);
+			this.starling.showStatsAt("left","top",3);
 			this.starling.stage.addEventListener(Event.RESIZE, onResize);
 			
 			
 			this.navigationManager = new MenuNavigationManager();
-			this.navigationManager.showSplashAndLoadGame();
+			this.navigationManager.gotoMenu(BaseMenu.SPLASH_SCREEN);
+			
+			loadResources();
 		}
 		
 		private function onResize(event:Event, size:Point):void
@@ -53,6 +57,24 @@ package
 				ScaleMode.SHOW_ALL);
 			
 		}
+		
+		private function loadResources():void{
+			var resourceLoader:DummyResourceLoader = DummyResourceLoader.getInstance();
+			
+			resourceLoader = DummyResourceLoader.getInstance();
+			resourceLoader.loadResources();
+			resourceLoader._loadSuccess.addOnce(onResourcesLoaded);
+		}
+		
+		private function onResourcesLoaded():void{
+			if((this.state as BaseMenu).menuID == BaseMenu.SPLASH_SCREEN){
+				//wait for the splash to go out
+			}else{
+				this.navigationManager.gotoMenu(BaseMenu.MAIN_MENU);
+			}
+		}
+		
+		
 		
 			
 		

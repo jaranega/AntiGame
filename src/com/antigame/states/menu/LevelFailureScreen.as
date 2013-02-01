@@ -1,4 +1,4 @@
-package com.antigame.states
+package com.antigame.states.menu
 {
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
@@ -8,11 +8,11 @@ package com.antigame.states
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	
-	public class LevelSuccessScreen extends StarlingState
+	public class LevelFailureScreen extends BaseMenu
 	{
-		public function LevelSuccessScreen()
+		public function LevelFailureScreen()
 		{
-			super();
+			super(LEVEL_FAILURE_SCREEN);
 			
 		}
 		

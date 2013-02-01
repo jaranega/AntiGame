@@ -1,9 +1,11 @@
-package com.antigame.states
+package com.antigame.states.menu
 {
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
 	import citrus.physics.box2d.Box2D;
 	
+	import com.antigame.assets.DummyResourceLoader;
+	import com.antigame.controller.MenuNavigationManager;
 	import com.antigame.utils.MenuFactory;
 	
 	import flash.events.TimerEvent;
@@ -15,7 +17,7 @@ package com.antigame.states
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	
-	public class SplashScreen extends StarlingState
+	public class SplashScreen extends BaseMenu
 	{
 		
 		public var _splashScreenTimeout:Signal = new Signal();
@@ -23,7 +25,7 @@ package com.antigame.states
 		
 		public function SplashScreen()
 		{
-			super();
+			super(SPLASH_SCREEN);
 		}
 		
 		override public function initialize():void{
@@ -35,10 +37,10 @@ package com.antigame.states
 			
 			add(MenuFactory.createCenteredLabel(this,"label","¡¡SPLASH!!", 0.5, 60, true));	
 			
-			waitSomeSecondsAndTimeout(2);
+			waitSomeSecondsAndShowLoadingScreen(2);
 		}
 		
-		private function waitSomeSecondsAndTimeout(seconds:int):void{
+		private function waitSomeSecondsAndShowLoadingScreen(seconds:int):void{
 			var downTimer:Timer = new Timer(seconds*1000, 1); // every second ten times and then complete         
 			downTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
 			downTimer.start()
@@ -47,6 +49,14 @@ package com.antigame.states
 		private function onTimerComplete(event:TimerEvent):void{
 			this.timedOut = true;
 			this._splashScreenTimeout.dispatch();
+			
+			if(DummyResourceLoader.getInstance().loadingEnded){
+				_showMenu.dispatch(MAIN_MENU);
+			}else{
+				_showMenu.dispatch(LOADING_SCREEN);
+			}
 		}
+		
+		
 	}
 }
