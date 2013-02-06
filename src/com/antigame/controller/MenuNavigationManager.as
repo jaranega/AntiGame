@@ -2,10 +2,7 @@ package com.antigame.controller
 {
 	import citrus.core.CitrusEngine;
 	import citrus.core.IState;
-	import citrus.core.starling.StarlingState;
 	
-	import com.antigame.assets.DummyResourceLoader;
-	import com.antigame.states.GameState;
 	import com.antigame.states.menu.BaseMenu;
 	import com.antigame.states.menu.LevelFailureScreen;
 	import com.antigame.states.menu.LevelSelectionMenu;
@@ -18,10 +15,6 @@ package com.antigame.controller
 	public class MenuNavigationManager
 	{
 		private var engine:CitrusEngine;
-		
-	
-		
-		private var resourceLoader:DummyResourceLoader;
 		
 		public function MenuNavigationManager()
 		{
@@ -79,7 +72,7 @@ package com.antigame.controller
 			var gameLevel:IState; 
 			switch(levelID){
 				case "lvl1":
-					gameLevel = new GameState();
+					//gameLevel = new GameState();
 					break;
 				case "lvl2":
 					//no level;

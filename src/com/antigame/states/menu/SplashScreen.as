@@ -1,21 +1,11 @@
 package com.antigame.states.menu
 {
-	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
-	import citrus.physics.box2d.Box2D;
-	
-	import com.antigame.assets.DummyResourceLoader;
-	import com.antigame.controller.MenuNavigationManager;
 	import com.antigame.utils.MenuFactory;
-	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-	
 	import org.osflash.signals.Signal;
-	
 	import starling.display.Quad;
-	import starling.display.Sprite;
-	import starling.text.TextField;
 	
 	public class SplashScreen extends BaseMenu
 	{
@@ -50,11 +40,11 @@ package com.antigame.states.menu
 			this.timedOut = true;
 			this._splashScreenTimeout.dispatch();
 			
-			if(DummyResourceLoader.getInstance().loadingEnded){
+			/*if(DummyResourceLoader.getInstance().loadingEnded){
 				_showMenu.dispatch(MAIN_MENU);
 			}else{
 				_showMenu.dispatch(LOADING_SCREEN);
-			}
+			}*/
 		}
 		
 		

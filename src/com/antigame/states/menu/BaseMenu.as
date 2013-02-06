@@ -1,22 +1,12 @@
 package com.antigame.states.menu
 {
 	import citrus.core.starling.StarlingState;
-	import citrus.objects.CitrusSprite;
-	import citrus.physics.box2d.Box2D;
 	
-	import com.antigame.utils.MenuFactory;
 	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
-	
 	import org.osflash.signals.Signal;
-	
-	import starling.display.Quad;
-	import starling.display.Sprite;
 	import starling.events.TouchEvent;
-	import starling.text.TextField;
 	
 	/* inspired on "Game Structure" blog post http://pzuh.blogspot.com.es/2012/10/citrus-engine-game-structure.html */
 	public class BaseMenu extends StarlingState
