@@ -42,10 +42,10 @@ package com.antigame.states.menu
 			var background:CitrusSprite = new CitrusSprite("back", {view: assetFactory.newImage("menuBackground"), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL SELECTION", 60, true, 200));	
+			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL SELECTION", 60, 0xFFFFFF, true, 200));	
 			
-			level1Button = MenuFactory.createButton("lvl1", "Level 1", 200, 350);
-			level2Button = MenuFactory.createButton("lvl2", "Level 2", 400, 350);
+			level1Button = MenuFactory.createButton("lvl1", "Level 1", 0xFFFFFF, 200, 350);
+			level2Button = MenuFactory.createButton("lvl2", "Level 2", 0xFFFFFF, 400, 350);
 			
 			var b:Button= assetFactory.newButton("playLogo");
 			b.addEventListener(Event.TRIGGERED,go);
@@ -53,7 +53,7 @@ package com.antigame.states.menu
 			b.y=stage.stageHeight/2-b.height/2;
 			addChild(b);
 		
-			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 200, 700);
+			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 0xFFFFFF, 200, 700);
 			
 			add(level1Button);
 			add(level2Button);

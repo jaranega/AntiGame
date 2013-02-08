@@ -29,9 +29,9 @@ package com.antigame.states.menu
 			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","SETTINGS MENU", 60, true, 200));	
+			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","SETTINGS MENU", 60, 0xFFFFFF, true, 200));	
 			
-			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 200, 700);
+			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 0xFFFFFF, 200, 700);
 			
 			add(mainMenuButton);
 		}

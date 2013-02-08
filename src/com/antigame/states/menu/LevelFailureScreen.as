@@ -24,7 +24,7 @@ package com.antigame.states.menu
 			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL FAILED", 60, true, 150));		
+			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL FAILED", 60, 0xFFFFFF, true, 150));		
 		}
 	}
 }
