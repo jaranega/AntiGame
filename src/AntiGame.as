@@ -27,7 +27,6 @@ package
 	public class AntiGame extends StarlingCitrusEngine
 	{
 		private var navigationManager:MenuNavigationManager;
-		private var menuState:MenuState;
 		
 		public static var assetManager:AssetManager;
 		
@@ -77,21 +76,6 @@ package
 				this.navigationManager.gotoMenu(BaseMenu.LEVEL_SELECTION_MENU);
 			}
 		}
-		
-		private function startGame():void
-		{
-			//TODO: integration with menusss
-			//this.navigationManager.gotoMenu(BaseMenu.MAIN_MENU);
-			/*menuState=new MenuState();
-			state = menuState;
-			menuState.lvlEnded.add(gotoGame);*/
-		}
-		
-		private function gotoGame():void
-		{
-			levelManager.gotoLevel(0);
-		}		
-		
 		
 		private function onResize(event:Event, size:Point):void
 		{
