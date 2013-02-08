@@ -1,10 +1,15 @@
 package com.antigame.characters
 {
 
-	import com.antigame.utils.GraphicUtils;
-	import flash.utils.setInterval;
 	import Box2D.Common.Math.b2Vec2;
+	
 	import citrus.objects.platformer.box2d.Enemy;
+	
+	import com.antigame.resources.ResourceLoader;
+	import com.antigame.utils.GraphicUtils;
+	
+	import flash.utils.setInterval;
+	
 	import starling.textures.TextureAtlas;
 	
 	public class RiotPolice extends Enemy
@@ -18,7 +23,7 @@ package com.antigame.characters
 			setInterval(doJump,1000)
 			
 			var policeXML:XML = XML(new _policeXML());
-			var sTextureAtlas:TextureAtlas = new TextureAtlas(AntiGame.assetManager.getTexture("police"), policeXML);
+			var sTextureAtlas:TextureAtlas = new TextureAtlas(ResourceLoader.getInstance().assetManager.getTexture("police"), policeXML);
 			
 			this.group = 3;
 			this.speed = 5;
