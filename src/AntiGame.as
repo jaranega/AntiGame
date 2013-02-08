@@ -10,12 +10,10 @@ package
 	import com.antigame.states.MenuState;
 	import com.antigame.states.menu.BaseMenu;
 	
-	import flash.display.MovieClip;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.system.ApplicationDomain;
 	
-	import citrus.core.IState;
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.utils.LevelManager;
 	
@@ -29,7 +27,6 @@ package
 	public class AntiGame extends StarlingCitrusEngine
 	{
 		private var navigationManager:MenuNavigationManager;
-		private var levelMC:MovieClip; 
 		private var menuState:MenuState;
 		
 		public static var assetManager:AssetManager;
@@ -50,16 +47,15 @@ package
 			this.starling.addEventListener(Event.CONTEXT3D_CREATE, loadAssets);
 			this.starling.stage.addEventListener(Event.RESIZE,onResize);
 			
-			//TODO: integration with menus
-			/*this.navigationManager = new MenuNavigationManager();
-			this.navigationManager.gotoMenu(BaseMenu.SPLASH_SCREEN);*/
+			this.navigationManager = new MenuNavigationManager();
+			this.navigationManager.gotoMenu(BaseMenu.SPLASH_SCREEN);
 		}
 		
 		private function loadLevelManager():void
 		{
 			levelManager = new LevelManager(BarcelonaLevelGameState);
 			levelManager.applicationDomain = ApplicationDomain.currentDomain;
-			levelManager.onLevelChanged.add(onLevelChanged);
+			levelManager.onLevelChanged.add(this.navigationManager.onLevelChanged);
 			levelManager.levels = [ [BarcelonaLevel1, "assets/levels/barcelonaLevel1.swf"], 
 									[BarcelonaLevel2, "assets/levels/barcelonaLevel2.swf"] ];	
 		}
@@ -78,21 +74,17 @@ package
 			trace("Loading assets, progress:", ratio);
 			if (ratio == 1.0) {
 				//Resources loaded!!!
-				startGame();
+				this.navigationManager.gotoMenu(BaseMenu.LEVEL_SELECTION_MENU);
 			}
 		}
 		
 		private function startGame():void
 		{
 			//TODO: integration with menusss
-			/*if((this.state as BaseMenu).menuID == BaseMenu.SPLASH_SCREEN){
-				//wait for the splash to go out
-			}else{
-				this.navigationManager.gotoMenu(BaseMenu.MAIN_MENU);
-			}*/
-			menuState=new MenuState();
+			//this.navigationManager.gotoMenu(BaseMenu.MAIN_MENU);
+			/*menuState=new MenuState();
 			state = menuState;
-			menuState.lvlEnded.add(gotoGame);	
+			menuState.lvlEnded.add(gotoGame);*/
 		}
 		
 		private function gotoGame():void
@@ -112,30 +104,6 @@ package
 			trace("After Resize: " + this.starling.viewPort.size.x, ' - ',  this.starling.viewPort.size.y);
 			trace("StageStarling: " +  this.starling.stage.stageWidth, ' - ',   this.starling.stage.stageHeight);
 		}
-
-		
-		private function onLevelChanged(level:BarcelonaLevelGameState):void 
-		{
-			state = level;
-			level.lvlEnded.add(_nextLevel);
-			level.restartLevel.add(_restartLevel);
-		}
-		
-		private function _nextLevel():void
-		{
-			levelManager.nextLevel();
-		}
-		
-		private function _restartLevel():void 
-		{
-			state = levelManager.currentLevel as IState;
-		}
-		
-		public function changeLvl():void 
-		{
-			state = new BarcelonaLevelGameState(levelMC);
-		}
-		
 		
 	}
 }

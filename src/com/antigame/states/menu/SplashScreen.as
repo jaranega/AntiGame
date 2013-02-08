@@ -13,6 +13,9 @@ package com.antigame.states.menu
 		public var _splashScreenTimeout:Signal = new Signal();
 		public var timedOut:Boolean = false;
 		
+		[Embed(source="/assets/imgs/splashScreen.png")]
+		private var _splashScreen:Class;
+		
 		public function SplashScreen()
 		{
 			super(SPLASH_SCREEN);
@@ -22,12 +25,12 @@ package com.antigame.states.menu
 			super.initialize();
 			
 			
-			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
+			var background:CitrusSprite = new CitrusSprite("background", {view:new _splashScreen(), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this.stage,"label","¡¡SPLASH!!", 60, true));	
+			//add(MenuFactory.createCenteredLabel(this.stage,"label","¡¡SPLASH!!", 60, true));	
 			
-			waitSomeSecondsAndShowLoadingScreen(2);
+			//waitSomeSecondsAndShowLoadingScreen(1000);
 		}
 		
 		private function waitSomeSecondsAndShowLoadingScreen(seconds:int):void{

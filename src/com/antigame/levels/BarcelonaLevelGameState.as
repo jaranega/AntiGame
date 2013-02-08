@@ -88,6 +88,7 @@ package com.antigame.levels
 			view.setupCamera(_hero, new MathVector(200*Starling.contentScaleFactor, 300*Starling.contentScaleFactor), new Rectangle(0, 0, _level.width*Starling.contentScaleFactor , 800*Starling.contentScaleFactor), new MathVector(0.25, 0.15));
 			(view.camera as StarlingCamera).zoom(0.75);
 			
+			AntiGame.assetManager.playSound("breakSong",1,0);
 			
 			//addFire();
 			addControls();

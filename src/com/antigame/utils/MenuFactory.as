@@ -1,11 +1,6 @@
 package com.antigame.utils
 {
-	import citrus.core.CitrusObject;
-	import citrus.core.IState;
-	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
-	
-	import starling.display.Button;
 	import starling.display.Stage;
 	import starling.text.TextField;
 

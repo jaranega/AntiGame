@@ -2,11 +2,11 @@ package com.antigame.resources
 {
 	public class EmbeddedSounds
 	{
-		[Embed(source="/assets/sounds/break.mp3")]
-		public static const breakTheLawSong:Class;
+		[Embed(source="/assets/sounds/breakSong.mp3")]
+		public static const breakSong:Class;
 		
-		[Embed(source="/assets/sounds/bajo.mp3")]
-		public static const breakTheLawBass:Class;
+		[Embed(source="/assets/sounds/breakBass.mp3")]
+		public static const breakBass:Class;
 		
 		[Embed(source="/assets/sounds/now.mp3")]
 		public static const now:Class;
