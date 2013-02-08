@@ -22,6 +22,9 @@ package com.antigame.resources
 		
 		[Embed(source="/assets/imgs/splashScreen.png")]
 		public static var splashScreen:Class;
+
+		[Embed(source="/assets/imgs/splashScreen.png")]
+		public static var menuBackground:Class;
 		
 		[Embed(source="/assets/imgs/textura.png")]
 		public static var textura:Class;
