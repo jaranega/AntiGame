@@ -20,7 +20,7 @@ package
 	import starling.utils.RectangleUtil;
 	import starling.utils.ScaleMode;
 	
-	[SWF(width="1280",height="800",frameRate="60",BackgroundColor="0xAA22CC")]
+	[SWF(width="1280",height="800",frameRate="60", backgroundColor="0x0")]
 	public class AntiGame extends StarlingCitrusEngine
 	{
 		private var navigationManager:MenuNavigationManager;
@@ -36,7 +36,7 @@ package
 		{
 			Starling.handleLostContext = true;
 			setUpStarling(true,1,null);
-			
+			this.starling.showStatsAt("left","top",3);
 			this.starling.addEventListener(Event.CONTEXT3D_CREATE, setupLevelsAndLoadAssets);
 			this.starling.stage.addEventListener(Event.RESIZE,onResize);
 			
@@ -84,7 +84,7 @@ package
 			this.starling.viewPort = RectangleUtil.fit(
 				new Rectangle(0, 0, this.starling.stage.stageWidth, this.starling.stage.stageHeight),
 				new Rectangle(0, 0, size.x, size.y),
-				ScaleMode.NO_BORDER);
+				ScaleMode.SHOW_ALL);
 			trace("After Resize: " + this.starling.viewPort.size.x, ' - ',  this.starling.viewPort.size.y);
 			trace("StageStarling: " +  this.starling.stage.stageWidth, ' - ',   this.starling.stage.stageHeight);
 		}
