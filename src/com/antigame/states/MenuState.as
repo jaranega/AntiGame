@@ -22,7 +22,7 @@ package com.antigame.states
 			
 			lvlEnded = new Signal();
 			
-			soundChannel = AntiGame.assetManager.playSound("breakTheLawBass",1,10000);
+			soundChannel = AntiGame.assetManager.playSound("breakBass",1,10000);
 			addEventListener(Event.ADDED_TO_STAGE,added);
 			
 		}
