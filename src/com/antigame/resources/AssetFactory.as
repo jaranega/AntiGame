@@ -8,6 +8,7 @@ package com.antigame.resources
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	import starling.utils.AssetManager;
 
 	public class AssetFactory {
@@ -27,6 +28,11 @@ package com.antigame.resources
 			}
 			
 			return instance;
+		}
+		
+		
+		public function getTextureAtlas(name:String):TextureAtlas{
+			return assetManager.getTextureAtlas(name);
 		}
 		
 		public function newImage(textureName:String):Image{

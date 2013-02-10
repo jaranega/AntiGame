@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
 <!-- $TexturePacker:SmartUpdate:fab5aca498d0f8e75d318a746eb13d18$ -->
-<TextureAtlas imagePath="anti.png">
+<TextureAtlas imagePath="antiHero.png">
     <SubTexture name="walk_01" x="2" y="2" width="300" height="311"/>
     <SubTexture name="walk_02" x="304" y="2" width="300" height="336"/>
     <SubTexture name="walk_03" x="606" y="2" width="300" height="311"/>
