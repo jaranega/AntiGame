@@ -1,8 +1,10 @@
 package com.antigame.resources
 {
+	import citrus.core.SoundManager;
 	import citrus.view.starlingview.StarlingTile;
 	
 	import flash.media.SoundChannel;
+	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
 	
 	import starling.display.Button;
@@ -18,6 +20,8 @@ package com.antigame.resources
 		
 		private static var instance:AssetFactory;
 		
+		private var backgroundMusic:Object;
+		
 		public function AssetFactory(e:Enforcer){
 			assetManager = ResourceLoader.getInstance().assetManager;
 		}
@@ -30,6 +34,11 @@ package com.antigame.resources
 			return instance;
 		}
 		
+		
+		//images and buttons
+		public function getTexture(name:String):Texture{
+			return assetManager.getTexture(name);
+		}
 		
 		public function getTextureAtlas(name:String):TextureAtlas{
 			return assetManager.getTextureAtlas(name);
@@ -52,9 +61,40 @@ package com.antigame.resources
 			return new Button(upTexture, text, downTexture);	
 		}
 		
+		
+		//sounds
+		//TODO: Improve with the use of citrus SoundManager. It can give us some extra functionality to mute sounds, or change volumes individually.
 		public function playSound(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel{
 			return assetManager.playSound(name, startTime, loops, transform);
 		}
+		
+		
+		public function playSoundOnce(name:String, startTime:Number=0):SoundChannel{
+			return playSound(name, startTime, 0, null);
+		}
+		
+		public function playBackgroundMusic(name:String, startTime:Number=0):SoundChannel{
+			if(backgroundMusic && backgroundMusic.name == name){
+				//requested music is already playing, do nothing
+				return backgroundMusic.channel;
+			}else{
+				stopBackgroundMusic();
+			}
+			
+			var channel:SoundChannel = playSound(name, startTime, 999999, null);
+			
+			backgroundMusic = {name:name ,channel:channel};
+			
+			return channel;
+		}
+		
+		public function stopBackgroundMusic():void{
+			if(this.backgroundMusic){
+				this.backgroundMusic.channel.stop();
+				this.backgroundMusic = null;
+			}
+		}
+		
 	}
 	
 	
