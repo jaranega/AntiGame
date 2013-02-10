@@ -4,6 +4,8 @@ package com.antigame.states.menu
 	import citrus.objects.CitrusSprite;
 	import citrus.physics.box2d.Box2D;
 	
+	import com.antigame.resources.AssetFactory;
+	import com.antigame.resources.ResourceLoader;
 	import com.antigame.utils.MenuFactory;
 	
 	import flash.events.MouseEvent;
@@ -17,6 +19,7 @@ package com.antigame.states.menu
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.text.TextField;
+	import starling.utils.AssetManager;
 	
 	public class MainMenu extends BaseMenu
 	{
@@ -24,22 +27,25 @@ package com.antigame.states.menu
 		protected var playButton:CitrusSprite;
 		protected var settingsButton:CitrusSprite;
 		
+		protected var assetFactory:AssetFactory;
+		
 		public function MainMenu()
 		{
 			super(MAIN_MENU);
 			
+			this.assetFactory = AssetFactory.getInstance();
 		}
 		
 		override public function initialize():void{
 			super.initialize();
 			
-			var background:CitrusSprite = new CitrusSprite("back", {view:new Quad(stage.stageWidth, stage.stageHeight, 0xFFFFFF), width:stage.stageWidth, height:stage.stageHeight});
+			var background:CitrusSprite = new CitrusSprite("back", {view: assetFactory.newImage("menuBackground"), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","MAIN MENU", 60, true, 200));		
+			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","MAIN MENU", 60, 0xFFFFFF, true, 200));		
 			
-			playButton = MenuFactory.createCenteredButton(this.stage, "playButton", "PLAY", 400);
-			settingsButton = MenuFactory.createCenteredButton(this.stage, "settingsButton", "SETTINGS", 500);
+			playButton = MenuFactory.createCenteredButton(this.stage, "playButton", "PLAY", 0xFFFFFF, 400);
+			settingsButton = MenuFactory.createCenteredButton(this.stage, "settingsButton", "SETTINGS", 0xFFFFFF, 500);
 			
 			add(playButton);
 			add(settingsButton);

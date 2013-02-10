@@ -1,8 +1,10 @@
 package com.antigame.characters
 {
+	import citrus.objects.platformer.box2d.Hero;
+	
+	import com.antigame.resources.ResourceLoader;
 	import com.antigame.utils.GraphicUtils;
 	
-	import citrus.objects.platformer.box2d.Hero;
 	import starling.textures.TextureAtlas;
 	
 	public class AntiHero extends Hero
@@ -15,7 +17,7 @@ package com.antigame.characters
 			super(name, params);
 			
 			var heroXml:XML = XML(new _heroXML());
-			var sTextureAtlas:TextureAtlas = new TextureAtlas(AntiGame.assetManager.getTexture("antiHero"), heroXml);
+			var sTextureAtlas:TextureAtlas = new TextureAtlas(ResourceLoader.getInstance().assetManager.getTexture("antiHero"), heroXml);
 			
 			GraphicUtils.resizeBox2DObject(this, sTextureAtlas, 0.4);
 			this.hurtDuration=200;

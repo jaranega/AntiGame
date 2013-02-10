@@ -1,16 +1,19 @@
 package com.antigame.states.menu
 {
+	import citrus.objects.CitrusSprite;
+	
+	import com.antigame.resources.AssetFactory;
+	import com.antigame.resources.ResourceLoader;
 	import com.antigame.utils.MenuFactory;
 	
 	import flash.media.SoundChannel;
-	
-	import citrus.objects.CitrusSprite;
 	
 	import starling.display.Button;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.utils.AssetManager;
 	
 	public class LevelSelectionMenu extends BaseMenu
 	{
@@ -20,37 +23,37 @@ package com.antigame.states.menu
 		protected var level1Button:CitrusSprite;
 		protected var level2Button:CitrusSprite;
 		
-		[Embed(source="/assets/imgs/splashScreen.png")]
-		private var _splashScreen:Class;
-		
 		public var soundChannel:SoundChannel;
+		
+		protected var assetFactory:AssetFactory;
 		
 		public function LevelSelectionMenu()
 		{
 			super(LEVEL_SELECTION_MENU);
 			
+			this.assetFactory = AssetFactory.getInstance();
 		}
 		
 		override public function initialize():void{
 			super.initialize();
 			
-			soundChannel = AntiGame.assetManager.playSound("breakBass",1,10000);
+			soundChannel = ResourceLoader.getInstance().assetManager.playSound("breakBass",1,10000);
 			
-			var background:CitrusSprite = new CitrusSprite("back", {view: new _splashScreen(), width:stage.stageWidth, height:stage.stageHeight});
+			var background:CitrusSprite = new CitrusSprite("back", {view: assetFactory.newImage("menuBackground"), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
 			
-			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL SELECTION", 60, true, 200));	
+			add(MenuFactory.createCenteredLabel(this.stage,"titleLabel","LEVEL SELECTION", 60, 0xFFFFFF, true, 200));	
 			
-			level1Button = MenuFactory.createButton("lvl1", "Level 1", 200, 350);
-			level2Button = MenuFactory.createButton("lvl2", "Level 2", 400, 350);
+			level1Button = MenuFactory.createButton("lvl1", "Level 1", 0xFFFFFF, 200, 350);
+			level2Button = MenuFactory.createButton("lvl2", "Level 2", 0xFFFFFF, 400, 350);
 			
-			var b:Button=new Button(AntiGame.assetManager.getTexture("playLogo"));
+			var b:Button= assetFactory.newButton("playLogo");
 			b.addEventListener(Event.TRIGGERED,go);
-			addChild(b);
 			b.x=stage.stageWidth/2-b.width/2;
 			b.y=stage.stageHeight/2-b.height/2;
+			addChild(b);
 		
-			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 200, 700);
+			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 0xFFFFFF, 200, 700);
 			
 			add(level1Button);
 			add(level2Button);
@@ -82,7 +85,7 @@ package com.antigame.states.menu
 		private function go(e:Event):void
 		{
 			soundChannel.stop();
-			soundChannel = AntiGame.assetManager.playSound("ueagh",1,0);
+			soundChannel = assetFactory.playSound("ueagh",1,0);
 			_startLevel.dispatch(level1Button.name);
 		}
 	}

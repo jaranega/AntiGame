@@ -1,12 +1,6 @@
 package com.antigame.levels
 {
 
-	import com.antigame.characters.AntiHero;
-	import com.antigame.characters.RiotPolice;
-	
-	import flash.display.MovieClip;
-	import flash.geom.Rectangle;
-	
 	import Box2D.Dynamics.Contacts.b2PolygonContact;
 	
 	import citrus.core.CitrusEngine;
@@ -25,6 +19,13 @@ package com.antigame.levels
 	import citrus.view.starlingview.StarlingCamera;
 	import citrus.view.starlingview.StarlingTileSystem;
 	
+	import com.antigame.characters.AntiHero;
+	import com.antigame.characters.RiotPolice;
+	import com.antigame.resources.ResourceLoader;
+	
+	import flash.display.MovieClip;
+	import flash.geom.Rectangle;
+	
 	import org.osflash.signals.Signal;
 	
 	import starling.core.Starling;
@@ -35,12 +36,15 @@ package com.antigame.levels
 	import starling.extensions.particles.PDParticleSystem;
 	import starling.extensions.particles.ParticleSystem;
 	import starling.textures.Texture;
+	import starling.utils.AssetManager;
 
 	
 	public class BarcelonaLevelGameState extends StarlingState 
 	{
 		public var lvlEnded:Signal;
 		public var restartLevel:Signal;
+		
+		protected var assetManager:AssetManager;
 		
 		protected var _hero:Hero;
 		protected var _endLevel:Sensor;
@@ -68,6 +72,8 @@ package com.antigame.levels
 			lvlEnded = new Signal();
 			restartLevel = new Signal();
 			
+			assetManager = ResourceLoader.getInstance().assetManager;
+			
 			var objectsUsed:Array = [AntiHero, RiotPolice, Platform, Sensor, CitrusSprite];
 		}
  
@@ -88,7 +94,7 @@ package com.antigame.levels
 			view.setupCamera(_hero, new MathVector(200*Starling.contentScaleFactor, 300*Starling.contentScaleFactor), new Rectangle(0, 0, _level.width*Starling.contentScaleFactor , 800*Starling.contentScaleFactor), new MathVector(0.25, 0.15));
 			(view.camera as StarlingCamera).zoom(0.75);
 			
-			AntiGame.assetManager.playSound("breakSong",1,0);
+			assetManager.playSound("breakSong",1,0);
 			
 			//addFire();
 			addControls();
@@ -112,7 +118,7 @@ package com.antigame.levels
 			mando.addAxisAction("Y","duck",-1,-.9);
 			
 			//Shot Button
-			shotButton = new Button(AntiGame.assetManager.getTexture("molotov"),"Shot!");
+			shotButton = new Button(assetManager.getTexture("molotov"),"Shot!");
 			shotButton.addEventListener(Event.TRIGGERED, shot);
 			addChild(shotButton);
 			
@@ -162,7 +168,7 @@ package com.antigame.levels
 		{
 			for (var i:int = 0; i < 3; i++) 
 			{	
-				var texture:Texture = AntiGame.assetManager.getTexture("blueContainer");
+				var texture:Texture = assetManager.getTexture("blueContainer");
 				var image:Image;
 				var physicObject:Box2DPhysicsObject;
 				image = new Image(texture);
@@ -177,7 +183,7 @@ package com.antigame.levels
 		private function addFire():ParticleSystem
 		{
 			psconfig = new XML(new _particleConfig())
-			psTexture = AntiGame.assetManager.getTexture("textura");
+			psTexture = assetManager.getTexture("textura");
 			
 			var ps:PDParticleSystem = new PDParticleSystem(psconfig, psTexture);
 			ps.start(); Starling.juggler.add(ps);
