@@ -5,9 +5,13 @@ package com.antigame.resources
 		//SpriteSheets
 		[Embed(source="/assets/imgs/antiHero.png")]
 		public static var antiHero:Class;
+		[Embed(source="/assets/imgs/antiHero.xml", mimeType="application/octet-stream")]
+		public static var heroXML:Class; //el nombre no importa
 		
 		[Embed(source="/assets/imgs/police.png")]
 		public static var police:Class;
+		[Embed(source="/assets/imgs/police.xml", mimeType="application/octet-stream")]
+		public static var policeXML:Class;
 		
 		//Images Levels
 		[Embed(source="/assets/imgs/blueContainer.png")]

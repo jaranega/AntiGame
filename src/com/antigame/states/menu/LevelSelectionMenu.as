@@ -3,17 +3,12 @@ package com.antigame.states.menu
 	import citrus.objects.CitrusSprite;
 	
 	import com.antigame.resources.AssetFactory;
-	import com.antigame.resources.ResourceLoader;
 	import com.antigame.utils.MenuFactory;
 	
-	import flash.media.SoundChannel;
-	
 	import starling.display.Button;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.utils.AssetManager;
 	
 	public class LevelSelectionMenu extends BaseMenu
 	{
@@ -23,7 +18,6 @@ package com.antigame.states.menu
 		protected var level1Button:CitrusSprite;
 		protected var level2Button:CitrusSprite;
 		
-		public var soundChannel:SoundChannel;
 		
 		protected var assetFactory:AssetFactory;
 		
@@ -37,7 +31,8 @@ package com.antigame.states.menu
 		override public function initialize():void{
 			super.initialize();
 			
-			soundChannel = ResourceLoader.getInstance().assetManager.playSound("breakBass",1,10000);
+			assetFactory.playBackgroundMusic("breakBass");
+			//assetFactory.playBackgroundMusic("breakSong");
 			
 			var background:CitrusSprite = new CitrusSprite("back", {view: assetFactory.newImage("menuBackground"), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
@@ -48,10 +43,8 @@ package com.antigame.states.menu
 			level2Button = MenuFactory.createButton("lvl2", "Level 2", 0xFFFFFF, 400, 350);
 			
 			var b:Button= assetFactory.newButton("playLogo");
-			b.addEventListener(Event.TRIGGERED,go);
-			b.x=stage.stageWidth/2-b.width/2;
-			b.y=stage.stageHeight/2-b.height/2;
-			addChild(b);
+	
+
 		
 			mainMenuButton = MenuFactory.createButton("mainMenuBtn", "MAIN MENU", 0xFFFFFF, 200, 700);
 			
@@ -66,27 +59,24 @@ package com.antigame.states.menu
 			
 				
 			if(touch){
-				soundChannel.stop();
+				
 				if(touch.isTouching(mainMenuButton.view)){
 					_showMenu.dispatch(BaseMenu.MAIN_MENU);
 				}
 				
 				if(touch.isTouching(level1Button.view)){
+					assetFactory.playSoundOnce("ueagh");
 					_startLevel.dispatch(level1Button.name);
 				}
 				
 				if(touch.isTouching(level2Button.view)){
+					assetFactory.playSoundOnce("ueagh");
 					_startLevel.dispatch(level2Button.name);
 				}
 			}
 			
 		}
 		
-		private function go(e:Event):void
-		{
-			soundChannel.stop();
-			soundChannel = assetFactory.playSound("ueagh",1,0);
-			_startLevel.dispatch(level1Button.name);
-		}
+		
 	}
 }

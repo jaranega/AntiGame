@@ -1,25 +1,13 @@
 package com.antigame.states.menu
 {
-	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
-	import citrus.physics.box2d.Box2D;
 	
 	import com.antigame.resources.AssetFactory;
-	import com.antigame.resources.ResourceLoader;
 	import com.antigame.utils.MenuFactory;
 	
-	import flash.events.MouseEvent;
-	
-	import org.osflash.signals.Signal;
-	
-	import starling.display.DisplayObject;
-	import starling.display.Quad;
-	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.text.TextField;
-	import starling.utils.AssetManager;
 	
 	public class MainMenu extends BaseMenu
 	{
@@ -38,6 +26,9 @@ package com.antigame.states.menu
 		
 		override public function initialize():void{
 			super.initialize();
+			
+			assetFactory.playBackgroundMusic("breakBass");
+			//assetFactory.playBackgroundMusic("breakSong");
 			
 			var background:CitrusSprite = new CitrusSprite("back", {view: assetFactory.newImage("menuBackground"), width:stage.stageWidth, height:stage.stageHeight});
 			add(background);
